@@ -19,7 +19,7 @@ const Home = () => {
       <section className="hero-section py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <span className="inline-block bg-kapuda-orange/20 text-kapuda-orange font-heading font-bold text-xs px-4 py-1.5 rounded-full tracking-widest mb-4 uppercase">
-            🔥 Promoção Especial
+            ✨ Kapuda Vendas Online — Os Melhores Produtos ao Seu Alcance
           </span>
           <h1 className="section-title text-3xl md:text-5xl text-primary-foreground mb-4 leading-tight">
             Transforme a Sua Vida<br />
@@ -35,7 +35,7 @@ const Home = () => {
             className="btn-cta inline-flex items-center gap-3 px-8 py-4 rounded-full text-primary-foreground text-lg animate-pulse-glow"
           >
             <ShoppingCart className="w-5 h-5" />
-            Comprar por US$ 6,11
+            Comprar por 5.500 Kz
           </a>
         </div>
       </section>
@@ -99,7 +99,7 @@ const Home = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <p className="text-muted-foreground text-xs uppercase tracking-wide font-semibold">Preço</p>
-                    <p className="text-4xl font-heading font-black text-kapuda-blue">US$ 6,11</p>
+                    <p className="text-4xl font-heading font-black text-kapuda-blue">5.500 Kz</p>
                     <p className="text-kapuda-orange text-xs font-semibold">Acesso imediato após pagamento</p>
                   </div>
                   <div className="text-right">
@@ -115,7 +115,7 @@ const Home = () => {
                   className="btn-cta w-full flex items-center justify-center gap-3 py-4 rounded-xl text-primary-foreground font-heading font-bold text-lg"
                 >
                   <ShoppingCart className="w-5 h-5" />
-                  Comprar Agora — US$ 6,11
+                  Comprar Agora — 5.500 Kz
                 </a>
                 <p className="text-center text-muted-foreground text-xs mt-3">
                   🔒 Pagamento seguro • Acesso imediato
