@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, Instagram } from "lucide-react";
+import { Mail, Phone, Cookie } from "lucide-react";
 import kapudaLogo from "@/assets/kapuda-logo.jpg";
+
+const resetCookies = () => {
+  localStorage.removeItem("kapuda-cookies-accepted");
+  window.location.reload();
+};
 
 const Footer = () => {
   return (
@@ -27,7 +32,7 @@ const Footer = () => {
           <div>
             <h3 className="font-heading font-bold text-kapuda-orange mb-4 text-sm tracking-widest uppercase">Navegação</h3>
             <ul className="flex flex-col gap-2">
-              {[
+            {[
                 { to: "/", label: "Início" },
                 { to: "/sobre", label: "Sobre Nós" },
                 { to: "/contactos", label: "Contactos" },
@@ -42,6 +47,15 @@ const Footer = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <button
+                  onClick={resetCookies}
+                  className="flex items-center gap-1.5 text-muted-foreground hover:text-kapuda-orange transition-colors text-sm"
+                >
+                  <Cookie className="w-3.5 h-3.5" />
+                  Gerir Cookies
+                </button>
+              </li>
             </ul>
           </div>
 
