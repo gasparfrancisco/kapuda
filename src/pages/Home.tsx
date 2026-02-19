@@ -1,0 +1,171 @@
+import { ShoppingCart, Star, CheckCircle2, Zap, Award, Clock, HeadphonesIcon } from "lucide-react";
+import cursoImg from "@/assets/curso-sobrancelhas.png";
+
+const PRODUCT_URL = "https://pay.kuenha.com/855c4e61-9eec-477d-a169-5368ee38ba27?p=75c6bbdd-e493-4bec-8190-efdab3fcd23f";
+
+const features = [
+  { icon: <Zap className="w-5 h-5 text-kapuda-orange" />, text: "Curso 100% online" },
+  { icon: <Award className="w-5 h-5 text-kapuda-orange" />, text: "Certificado profissional" },
+  { icon: <Clock className="w-5 h-5 text-kapuda-orange" />, text: "Acesso vitalício" },
+  { icon: <HeadphonesIcon className="w-5 h-5 text-kapuda-orange" />, text: "Suporte direto" },
+  { icon: <CheckCircle2 className="w-5 h-5 text-kapuda-orange" />, text: "Curso de Maquiagem GRÁTIS" },
+  { icon: <CheckCircle2 className="w-5 h-5 text-kapuda-orange" />, text: "Bónus: dicas de vendas" },
+];
+
+const Home = () => {
+  return (
+    <main>
+      {/* Hero Section */}
+      <section className="hero-section py-16 md:py-24">
+        <div className="container mx-auto px-4 text-center">
+          <span className="inline-block bg-kapuda-orange/20 text-kapuda-orange font-heading font-bold text-xs px-4 py-1.5 rounded-full tracking-widest mb-4 uppercase">
+            🔥 Promoção Especial
+          </span>
+          <h1 className="section-title text-3xl md:text-5xl text-primary-foreground mb-4 leading-tight">
+            Transforme a Sua Vida<br />
+            <span className="text-kapuda-orange">com a Beleza!</span>
+          </h1>
+          <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto mb-8">
+            Aprenda sobrancelhas e maquiagem do zero e comece a ganhar de <strong>150.000kz a 300.000kz</strong> por mês!
+          </p>
+          <a
+            href={PRODUCT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-cta inline-flex items-center gap-3 px-8 py-4 rounded-full text-primary-foreground text-lg animate-pulse-glow"
+          >
+            <ShoppingCart className="w-5 h-5" />
+            Comprar por US$ 6,11
+          </a>
+        </div>
+      </section>
+
+      {/* Product Section */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Product Image */}
+            <div className="relative">
+              <div className="absolute -inset-2 rounded-2xl bg-kapuda-orange/20 blur-xl"></div>
+              <div className="relative product-card rounded-2xl overflow-hidden border border-kapuda-orange/20">
+                <img
+                  src={cursoImg}
+                  alt="Curso de Designer de Sobrancelhas e Maquiagem Profissional"
+                  className="w-full object-cover"
+                />
+              </div>
+              {/* Badge */}
+              <div className="absolute -top-4 -right-4 bg-kapuda-pink text-primary-foreground font-heading font-black text-sm px-4 py-2 rounded-full shadow-lg rotate-6">
+                GRÁTIS + Maquiagem!
+              </div>
+            </div>
+
+            {/* Product Info */}
+            <div className="animate-fade-in-up">
+              <span className="inline-block bg-primary/10 text-primary font-heading font-bold text-xs px-3 py-1 rounded-full mb-4 uppercase tracking-wide">
+                Produto em Destaque
+              </span>
+              <h2 className="section-title text-2xl md:text-3xl text-foreground mb-3">
+                Curso de <span className="text-kapuda-blue">Designer de Sobrancelhas</span> e <span className="text-kapuda-pink">Maquiagem</span>
+              </h2>
+
+              {/* Stars */}
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-kapuda-orange text-kapuda-orange" />
+                ))}
+                <span className="text-muted-foreground text-sm ml-2">(Profissional)</span>
+              </div>
+
+              {/* Description */}
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                💄 Já pensou em ganhar de <strong>150.000kz a 300.000kz</strong> kwanzas por mês trabalhando com sobrancelhas e maquiagem?
+                Com o nosso <strong>Curso de Designer de Sobrancelhas PROFISSIONAL</strong>, você aprende tudo do zero e ainda ganha
+                o Curso Completo de Maquiagem totalmente <strong>GRÁTIS!</strong>
+              </p>
+
+              {/* Features */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                {features.map((f, i) => (
+                  <div key={i} className="flex items-center gap-2 bg-muted rounded-lg px-3 py-2">
+                    {f.icon}
+                    <span className="text-foreground text-sm font-medium">{f.text}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Price & CTA */}
+              <div className="bg-kapuda-blue/5 border border-kapuda-blue/20 rounded-xl p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <p className="text-muted-foreground text-xs uppercase tracking-wide font-semibold">Preço</p>
+                    <p className="text-4xl font-heading font-black text-kapuda-blue">US$ 6,11</p>
+                    <p className="text-kapuda-orange text-xs font-semibold">Acesso imediato após pagamento</p>
+                  </div>
+                  <div className="text-right">
+                    <div className="bg-kapuda-pink/10 text-kapuda-pink font-heading font-bold text-xs px-3 py-1 rounded-full border border-kapuda-pink/20">
+                      OFERTA ESPECIAL
+                    </div>
+                  </div>
+                </div>
+                <a
+                  href={PRODUCT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-cta w-full flex items-center justify-center gap-3 py-4 rounded-xl text-primary-foreground font-heading font-bold text-lg"
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                  Comprar Agora — US$ 6,11
+                </a>
+                <p className="text-center text-muted-foreground text-xs mt-3">
+                  🔒 Pagamento seguro • Acesso imediato
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-14 bg-kapuda-blue/5">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="section-title text-2xl md:text-3xl text-foreground mb-3">
+            O que você vai <span className="text-kapuda-orange">receber?</span>
+          </h2>
+          <p className="text-muted-foreground mb-10 max-w-xl mx-auto">
+            Tudo o que precisa para começar uma carreira de sucesso na área da beleza
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {[
+              { emoji: "🎓", title: "Curso Online Completo", desc: "Aprenda no seu ritmo, a qualquer hora e em qualquer lugar" },
+              { emoji: "📜", title: "Certificado Profissional", desc: "Receba um certificado reconhecido para alavancar a sua carreira" },
+              { emoji: "💄", title: "Maquiagem GRÁTIS", desc: "Curso completo de maquiagem incluído sem custo adicional" },
+              { emoji: "♾️", title: "Acesso Vitalício", desc: "Acesso permanente ao conteúdo, incluindo actualizações futuras" },
+              { emoji: "🎧", title: "Suporte Directo", desc: "Apoio personalizado durante a sua jornada de aprendizagem" },
+              { emoji: "💰", title: "Dicas de Vendas", desc: "Bónus exclusivo com estratégias para rentabilizar as suas competências" },
+            ].map((item, i) => (
+              <div key={i} className="product-card rounded-xl p-6 text-center border border-border hover:border-kapuda-orange/40 transition-all hover:shadow-lg">
+                <div className="text-4xl mb-3">{item.emoji}</div>
+                <h3 className="font-heading font-bold text-foreground text-base mb-2">{item.title}</h3>
+                <p className="text-muted-foreground text-sm">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12">
+            <a
+              href={PRODUCT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-cta inline-flex items-center gap-3 px-10 py-4 rounded-full text-primary-foreground font-heading font-bold text-lg"
+            >
+              <ShoppingCart className="w-5 h-5" />
+              Quero Começar Agora!
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+};
+
+export default Home;
