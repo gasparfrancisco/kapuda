@@ -13,7 +13,10 @@ const Header = () => {
     { to: "/contactos", label: "Contactos" },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => {
+    if (path === "/") return location.pathname === "/";
+    return location.pathname.startsWith(path);
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-kapuda-blue shadow-lg">
