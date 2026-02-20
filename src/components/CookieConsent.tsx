@@ -1,25 +1,36 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Cookie } from "lucide-react";
+import { Cookie, Shield } from "lucide-react";
+
+const COOKIE_KEY = "kapuda-cookies-v2";
 
 const CookieConsent = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const accepted = localStorage.getItem("kapuda-cookies-accepted");
-    if (!accepted) {
-      const timer = setTimeout(() => setVisible(true), 800);
-      return () => clearTimeout(timer);
+    // Migrar da chave antiga para a nova — garante que todos vejam o banner
+    const oldKey = localStorage.getItem("kapuda-cookies-accepted");
+    if (oldKey !== null) {
+      // Remove chave antiga e força nova aceitação
+      localStorage.removeItem("kapuda-cookies-accepted");
     }
+
+    const timer = setTimeout(() => {
+      const stored = localStorage.getItem(COOKIE_KEY);
+      if (!stored) {
+        setVisible(true);
+      }
+    }, 600);
+    return () => clearTimeout(timer);
   }, []);
 
   const accept = () => {
-    localStorage.setItem("kapuda-cookies-accepted", "true");
+    localStorage.setItem(COOKIE_KEY, "accepted");
     setVisible(false);
   };
 
   const decline = () => {
-    localStorage.setItem("kapuda-cookies-accepted", "false");
+    localStorage.setItem(COOKIE_KEY, "declined");
     setVisible(false);
   };
 
@@ -27,77 +38,121 @@ const CookieConsent = () => {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-[9999] p-4"
       style={{
-        animation: "fade-in-up 0.4s ease forwards",
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 99999,
+        padding: "1rem",
+        animation: "slideUpCookie 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
       }}
     >
-      <div className="container mx-auto max-w-4xl">
-        <div
-          className="rounded-xl shadow-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4"
-          style={{
-            background: "hsl(220, 30%, 12%)",
-            border: "1px solid hsl(27, 90%, 54%, 0.35)",
-          }}
-        >
-          <Cookie className="w-8 h-8 shrink-0" style={{ color: "hsl(27, 90%, 54%)" }} />
-          <div className="flex-1 text-sm">
-            <p
-              className="font-bold mb-1"
-              style={{ fontFamily: "Montserrat, sans-serif", color: "hsl(0, 0%, 100%)" }}
-            >
-              🍪 Utilizamos Cookies
-            </p>
-            <p style={{ color: "hsl(215, 16%, 65%)", fontSize: "0.75rem", lineHeight: "1.5" }}>
-              Utilizamos cookies para melhorar a sua experiência no nosso site. Ao continuar a
-              navegar, concorda com a nossa{" "}
-              <Link
-                to="/privacidade"
-                style={{ color: "hsl(27, 90%, 54%)", textDecoration: "underline" }}
-              >
-                Política de Privacidade
-              </Link>
-              .
-            </p>
-          </div>
-          <div className="flex gap-3 shrink-0 w-full sm:w-auto">
-            <button
-              onClick={decline}
-              style={{
-                flex: "1 1 0%",
-                padding: "0.5rem 1rem",
-                borderRadius: "0.5rem",
-                border: "1px solid hsl(215, 16%, 47%, 0.4)",
-                color: "hsl(215, 16%, 65%)",
-                fontSize: "0.75rem",
-                fontWeight: 600,
-                background: "transparent",
-                cursor: "pointer",
-                transition: "border-color 0.2s",
-              }}
-            >
-              Recusar
-            </button>
-            <button
-              onClick={accept}
-              style={{
-                flex: "1 1 0%",
-                padding: "0.5rem 1.25rem",
-                borderRadius: "0.5rem",
-                background: "linear-gradient(135deg, hsl(27, 90%, 54%) 0%, hsl(27, 90%, 42%) 100%)",
-                boxShadow: "0 8px 32px -8px hsl(27, 90%, 54%, 0.5)",
-                color: "white",
-                fontSize: "0.75rem",
-                fontWeight: 700,
-                fontFamily: "Montserrat, sans-serif",
-                cursor: "pointer",
-                border: "none",
-                transition: "transform 0.2s, box-shadow 0.2s",
-              }}
-            >
-              Aceitar Todos
-            </button>
-          </div>
+      <style>{`
+        @keyframes slideUpCookie {
+          from { opacity: 0; transform: translateY(100%); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+      <div
+        style={{
+          maxWidth: "900px",
+          margin: "0 auto",
+          borderRadius: "1rem",
+          boxShadow: "0 -4px 40px rgba(0,0,0,0.35)",
+          background: "hsl(220, 30%, 10%)",
+          border: "1px solid rgba(234, 130, 30, 0.4)",
+          padding: "1.25rem 1.5rem",
+        }}
+      >
+        {/* Header */}
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.75rem" }}>
+          <Shield style={{ width: "20px", height: "20px", color: "hsl(27, 90%, 54%)", flexShrink: 0 }} />
+          <span style={{
+            fontFamily: "Montserrat, sans-serif",
+            fontWeight: 800,
+            fontSize: "0.95rem",
+            color: "white",
+          }}>
+            🍪 Política de Privacidade & Cookies
+          </span>
+        </div>
+
+        {/* Body */}
+        <p style={{
+          color: "hsl(215, 16%, 72%)",
+          fontSize: "0.78rem",
+          lineHeight: "1.6",
+          marginBottom: "1rem",
+        }}>
+          Ao entrar neste site, está a concordar com a utilização de cookies para melhorar a sua experiência.
+          Os seus dados são tratados com segurança e nunca partilhados com terceiros sem o seu consentimento.
+          Consulte a nossa{" "}
+          <Link
+            to="/privacidade"
+            style={{ color: "hsl(27, 90%, 60%)", textDecoration: "underline", fontWeight: 600 }}
+          >
+            Política de Privacidade
+          </Link>{" "}
+          para mais detalhes.
+        </p>
+
+        {/* Buttons */}
+        <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+          <button
+            onClick={decline}
+            style={{
+              padding: "0.55rem 1.25rem",
+              borderRadius: "0.5rem",
+              border: "1px solid rgba(150, 160, 180, 0.35)",
+              color: "hsl(215, 16%, 65%)",
+              fontSize: "0.78rem",
+              fontWeight: 600,
+              background: "transparent",
+              cursor: "pointer",
+              fontFamily: "Montserrat, sans-serif",
+              transition: "border-color 0.2s",
+            }}
+          >
+            Recusar
+          </button>
+          <button
+            onClick={accept}
+            style={{
+              padding: "0.55rem 1.5rem",
+              borderRadius: "0.5rem",
+              background: "linear-gradient(135deg, hsl(27, 90%, 54%) 0%, hsl(27, 90%, 40%) 100%)",
+              boxShadow: "0 4px 20px rgba(234, 130, 30, 0.45)",
+              color: "white",
+              fontSize: "0.78rem",
+              fontWeight: 700,
+              fontFamily: "Montserrat, sans-serif",
+              cursor: "pointer",
+              border: "none",
+            }}
+          >
+            ✓ Aceitar & Continuar
+          </button>
+          <Link
+            to="/privacidade"
+            onClick={accept}
+            style={{
+              padding: "0.55rem 1.25rem",
+              borderRadius: "0.5rem",
+              border: "1px solid rgba(234, 130, 30, 0.3)",
+              color: "hsl(27, 90%, 60%)",
+              fontSize: "0.78rem",
+              fontWeight: 600,
+              fontFamily: "Montserrat, sans-serif",
+              textDecoration: "none",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.35rem",
+            }}
+          >
+            <Cookie style={{ width: "13px", height: "13px" }} />
+            Ver Política
+          </Link>
         </div>
       </div>
     </div>
