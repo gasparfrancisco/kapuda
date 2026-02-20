@@ -175,7 +175,7 @@ const Home = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <p className="text-muted-foreground text-xs uppercase tracking-wide font-semibold">Preço</p>
-                    <p className="text-4xl font-heading font-black text-kapuda-pink">Ver oferta</p>
+                    <p className="text-4xl font-heading font-black text-kapuda-pink">7.100 Kz</p>
                     <p className="text-kapuda-orange text-xs font-semibold">Acesso imediato após pagamento</p>
                   </div>
                   <div className="bg-kapuda-orange/10 text-kapuda-orange font-heading font-bold text-xs px-3 py-1 rounded-full border border-kapuda-orange/20">
